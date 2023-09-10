@@ -15,7 +15,7 @@ app.use(express.json())
 
 
 // sign up
-app.get('/signup',async(req,res)=>{
+app.post('/signup',async(req,res)=>{
     const {email,password,name} = req.body;
     const foundOne = await User.findOne({email:email})
     if(foundOne!=null){
@@ -41,7 +41,7 @@ app.get('/signup',async(req,res)=>{
 })
 
 // login
-app.get('/login',async (req,res)=>{
+app.post('/login',async (req,res)=>{
     const {email,password} = req.body
     const found = await User.findOne({email:email})
     if(found==null){
