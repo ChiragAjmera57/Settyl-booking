@@ -19,7 +19,7 @@ app.post('/signup',async(req,res)=>{
     const {email,password,name} = req.body;
     const foundOne = await User.findOne({email:email})
     if(foundOne!=null){
-       return res.send({msg:"invalid input"})
+       return res.status(400).statusMessage('invalid action').send({msg:"invalid input"})
     } 
     else{
         await bcrypt.hash(password, 5, function(err, hash) { 
@@ -31,7 +31,7 @@ app.post('/signup',async(req,res)=>{
             });
             try { 
                   user.save()
-                res.send({msg:"user registerd succesfully"});
+                res.status(200).statusMessage('success').send({msg:"user registerd succesfully"});
             } catch (error) { 
                 res.send({msg:"please try again later"})
             }
