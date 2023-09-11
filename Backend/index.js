@@ -154,6 +154,19 @@ app.get("/user-data",authentication,async(req,res)=>{
 })
 
 
+//user created event
+app.get('/created-events',authentication,async(req,res)=>{
+    const userId =  req.user_id;
+    const eventFound = await Event.find({organizer:userId})
+    if(eventFound==null){
+      return  res.send({msg:`no event`})
+    }
+    else{
+        res.send({eventFound})
+    }
+
+})
+
 app.listen(5000,()=>{
     try {
         connection
